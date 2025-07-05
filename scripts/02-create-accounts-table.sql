@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS accounts (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  account_name VARCHAR(255) NOT NULL,
+  account_type VARCHAR(50) NOT NULL, -- e.g., 'checking', 'savings'
+  balance NUMERIC(15, 2) NOT NULL DEFAULT 0.00,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);

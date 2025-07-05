@@ -3,45 +3,47 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { signIn } from "@/app/actions/auth"
+import { signUp } from "@/app/actions/auth"
 
-export default function LoginPage({
-  searchParams,
-}: {
-  searchParams: { message?: string }
-}) {
+export default function SignUpPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Sign In</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
           <CardDescription className="text-center">
-            Enter your email and password to access your account
+            Enter your information to create your banking account
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {searchParams.message && (
-            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
-              <p className="text-sm text-blue-800">{searchParams.message}</p>
+          <form action={signUp} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="fullName">Full Name</Label>
+              <Input id="fullName" name="fullName" type="text" placeholder="John Doe" required />
             </div>
-          )}
-          <form action={signIn} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" name="email" type="email" placeholder="john@example.com" required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" name="password" type="password" required />
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Minimum 6 characters"
+                minLength={6}
+                required
+              />
             </div>
             <Button type="submit" className="w-full">
-              Sign In
+              Create Account
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
-            {"Don't have an account? "}
-            <Link href="/auth/signup" className="text-blue-600 hover:underline">
-              Sign up
+            Already have an account?{" "}
+            <Link href="/auth/login" className="text-blue-600 hover:underline">
+              Sign in
             </Link>
           </div>
         </CardContent>
